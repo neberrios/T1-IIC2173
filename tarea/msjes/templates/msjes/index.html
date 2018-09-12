@@ -1,0 +1,25 @@
+<h2>Últimos Comentarios:<h2>
+
+{% if newest_messages_list %}
+  <table>
+  <tr>
+    <th>Texto</th>
+    <th>Fecha</th>
+    <th>IP Cliente</th>
+  </tr>
+  {% for message in newest_messages_list %}
+    <tr>
+      <td>{{ message.message_text }}</td>
+      <td>{{ message.pub_date }}</td>
+      <td>   {{ message.client_ip }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+{% else %}
+    <p>No hay mensajes disponibles</p>
+{% endif %}
+
+<form action="{% url 'comment' %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Escriba un comentario" />
+</form>
